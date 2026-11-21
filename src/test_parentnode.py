@@ -26,7 +26,7 @@ class test_ParentNode(unittest.TestCase):
 
         self.assertEqual(
             parent_node.to_html(),
-            '<div href=id:"target=parent-id"><span href=class:"target=child-class">child</span></div>',
+            '<div id="parent-id"><span class="child-class">child</span></div>',
         )
 
     def test_to_html_with_empty_children(self):
@@ -35,14 +35,14 @@ class test_ParentNode(unittest.TestCase):
         self.assertEqual(parent_node.to_html(), "<div></div>")
 
     def test_to_html_with_none_children(self):
-        parent_node = ParentNode("div", None)
+        parent_node = ParentNode("div", None)  # pyright: ignore[reportArgumentType]
 
         with self.assertRaises(ValueError):
             parent_node.to_html()
 
     def test_to_html_with_none_tag(self):
         child_node = LeafNode("span", "child")
-        parent_node = ParentNode(None, [child_node])
+        parent_node = ParentNode(None, [child_node])  # pyright: ignore[reportArgumentType]
 
         with self.assertRaises(ValueError):
             parent_node.to_html()

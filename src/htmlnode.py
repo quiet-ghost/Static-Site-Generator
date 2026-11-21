@@ -3,7 +3,7 @@ class HTMLNode:
         self,
         tag: str | None,
         value: str | None,
-        children: list[str] | None,
+        children: list["HTMLNode"] | None,
         props: dict[str, str] | None,
     ):
         self.tag = tag
@@ -21,9 +21,7 @@ class HTMLNode:
         if self.props is None:
             return ""
 
-        return " ".join(
-            f'href={key}:"target={value}"' for key, value in self.props.items()
-        )
+        return " ".join(f'{key}="{value}"' for key, value in self.props.items())
 
     def __repr__(self) -> str:
         return f"HTMLNode(tag={self.tag}, value={self.value}, children={self.children}, props={self.props})"
